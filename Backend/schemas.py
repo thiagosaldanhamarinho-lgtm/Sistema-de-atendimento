@@ -22,4 +22,11 @@ class ProductResponse(BaseModel):
     image_alt: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
+
+class ProductCreate(BaseModel):
+    name: str
+    price: float
+    stock: int
+    image_url: str
+    image_alt: str
