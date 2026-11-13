@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oficina & Arte - Agendamentos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- TELA 1: Menu Inicial -->
+    <section id="screen-menu" class="screen active">
+        <header>
+            <h1>Oficina & Arte</h1>
+            <button class="btn btn-secondary">Entrar</button>
+        </header>
+        <main>
+            <div class="hero-card">
+                <h2>Solicite um orçamento in-loco ou compre online!</h2>
+                <button class="btn btn-primary btn-large" onclick="navTo('screen-schedule')">
+                    📅 Agendar Visita Técnica
+                </button>
+            </div>
+            
+            <h3>Prontos a Pronta Entrega</h3>
+            <div class="product-grid" id="catalog">
+                <!-- Preenchido via JavaScript -->
+            </div>
+        </main>
+    </section>
+
+    <!-- TELA 2: Agendamento -->
+    <section id="screen-schedule" class="screen hidden">
+        <header>
+            <button class="btn btn-icon" onclick="navTo('screen-menu')">❮</button>
+            <h1>Agendar Visita Técnica</h1>
+        </header>
+        <main>
+            <form id="appointment-form">
+                <label for="name">Seu Nome</label>
+                <input type="text" id="name" required class="touch-target">
+
+                <label for="address">Endereço Completo</label>
+                <input type="text" id="address" placeholder="Ex: Mauá, SP" required class="touch-target">
+
+                <label for="description">Descrição do Serviço</label>
+                <textarea id="description" rows="3" required class="touch-target"></textarea>
+
+                <label>Escolha a Data e Horário (Ex: 15/11)</label>
+                <input type="datetime-local" id="datetime" required class="touch-target">
+
+                <button type="submit" class="btn btn-primary btn-full touch-target">Confirmar Agendamento</button>
+            </form>
+        </main>
+    </section>
+
+    <!-- TELA 3: Resultado (Alertas) -->
+    <section id="screen-result" class="screen hidden">
+        <header>
+            <h1>Status do Agendamento</h1>
+        </header>
+        <main class="center-content">
+            <div id="result-success" class="hidden">
+                <div class="icon-success">✅</div>
+                <h2>Agendamento Confirmado!</h2>
+                <p id="result-details"></p>
+                <button class="btn btn-secondary btn-full touch-target" onclick="navTo('screen-menu')">Voltar ao Início</button>
+            </div>
+
+            <!-- Alerta Acessível (Cor + Ícone + Texto) -->
+            <div id="result-error" class="alert-box hidden">
+                <span class="alert-icon">⚠️</span>
+                <div class="alert-text">
+                    <strong>Atenção:</strong> Este horário acabou de ser reservado. Escolha o próximo.
+                </div>
+                <button class="btn btn-secondary btn-full touch-target mt-1" onclick="navTo('screen-schedule')">Escolher Outro Horário</button>
+            </div>
+        </main>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>
