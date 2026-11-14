@@ -28,6 +28,8 @@ jobs:
           if [ -f backend/requirements.txt ]; then pip install -r backend/requirements.txt; fi
 
       - name: Executar Testes Automatizados (Pytest)
+        env:
+          DATABASE_URL: "sqlite:///./test.db"
         run: |
           cd backend
           pytest -v
