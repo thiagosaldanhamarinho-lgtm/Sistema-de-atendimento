@@ -1,4 +1,4 @@
-const API_URL = "https://sua-api-railway.app/api"; // Substituir após o deploy no Railway
+const API_URL = "http://127.0.0.1:8000"; // Substituir após o deploy no Railway
 
 // Navegação entre as telas do SPA
 function navTo(screenId) {
@@ -57,10 +57,10 @@ document.getElementById('appointment-form').addEventListener('submit', async (e)
 
 async function loadProducts() {
     try {
-        const res = await fetch(`${API_URL}/products`);
+        const res = await fetch(`${API_URL}/api/products`);
         const products = await res.json();
         const catalog = document.getElementById('catalog');
-        
+
         if (products.length === 0) {
             catalog.innerHTML = "<p>Nenhum produto a pronta entrega no momento.</p>";
             return;
@@ -69,7 +69,7 @@ async function loadProducts() {
         // RF02: Renderiza apenas produtos com estoque (regra já filtrada pelo backend)
         catalog.innerHTML = products.map(p => `
             <div class="product-card" style="border: 1px solid #ccc; padding: 15px; border-radius: 8px; margin-bottom: 10px;">
-                <img src="${p.image_url}" alt="${p.image_alt}" style="max-width: 100%; border-radius: 4px;">
+                <img src="${p.image_url}" alt="${p.image_alt}" class="product-img">
                 <h4 style="margin: 10px 0 5px 0;">${p.name}</h4>
                 <p style="margin: 0; font-weight: bold; color: var(--primary-color);">R$ ${p.price.toFixed(2)}</p>
                 <p style="margin: 5px 0 0 0; font-size: 14px;">Estoque: ${p.stock}</p>
@@ -81,4 +81,5 @@ async function loadProducts() {
 }
 
 // Executa a função automaticamente assim que a página abrir
+document.addEventListener('DOMContentLoaded', loadProducts);
 document.addEventListener('DOMContentLoaded', loadProducts);

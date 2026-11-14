@@ -30,6 +30,26 @@ def create_appointment(appt: schemas.AppointmentCreate, db: Session = Depends(ge
     existing_appt = db.query(models.Appointment).filter(
         models.Appointment.scheduled_at == appt.scheduled_at
     ).first()
+
+@app.post("/api/products", response_model=schemas.ProductResponse, status_code=201)
+def create_product(product: schemas.ProductCreate, db: Session = Depends(get_db)):
+    db_product = models.Product(**product.dict())
+    db.add(db_product)
+    db.commit()
+    db.refresh(db_product)
+    return db_product
+
+from fastapi import HTTPException
+
+@app.delete("/api/products/{product_id}")
+def delete_product(product_id: int, db: Session = Depends(get_db)):
+    product = db.query(models.Product).filter(models.Product.id == product_id).first()
+    if not product:
+        raise HTTPException(status_code=404, detail="Produto não encontrado")
+    
+    db.delete(product)
+    db.commit()
+    return {"message": "Produto deletado com sucesso"}
     
     if existing_appt:
         # RNF02: Omissão de erro técnico no frontend (Retorna apenas 409)

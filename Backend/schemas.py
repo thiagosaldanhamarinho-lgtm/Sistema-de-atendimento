@@ -21,8 +21,6 @@ class ProductResponse(BaseModel):
     image_url: str
     image_alt: str
 
-    class Config:
-        from_attributes = True
 
 class ProductCreate(BaseModel):
     name: str
@@ -30,3 +28,5 @@ class ProductCreate(BaseModel):
     stock: int
     image_url: str
     image_alt: str
+    class Config:
+        from_attributes = True
