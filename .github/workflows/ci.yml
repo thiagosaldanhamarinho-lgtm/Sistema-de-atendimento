@@ -29,5 +29,5 @@ jobs:
         env:
           DATABASE_URL: "sqlite:///./test.db"
         run: |
-          cd backend
+          cd Backend
           pytest -v
