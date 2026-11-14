@@ -19,6 +19,7 @@ jobs:
         with:
           python-version: '3.10'
           cache: 'pip'
+          cache-dependency-path: backend/requirements.txt
 
       - name: Instalar Dependências
         run: |
@@ -28,4 +29,5 @@ jobs:
 
       - name: Executar Testes Automatizados (Pytest)
         run: |
+          cd backend
           pytest -v
