@@ -66,13 +66,17 @@ async function loadProducts() {
             return;
         }
 
-        // RF02: Renderiza apenas produtos com estoque (regra já filtrada pelo backend)
         catalog.innerHTML = products.map(p => `
-            <div class="product-card" style="border: 1px solid #ccc; padding: 15px; border-radius: 8px; margin-bottom: 10px;">
-                <img src="${p.image_url}" alt="${p.image_alt}" class="product-img">
-                <h4 style="margin: 10px 0 5px 0;">${p.name}</h4>
-                <p style="margin: 0; font-weight: bold; color: var(--primary-color);">R$ ${p.price.toFixed(2)}</p>
-                <p style="margin: 5px 0 0 0; font-size: 14px;">Estoque: ${p.stock}</p>
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="${p.image_url}" 
+                         alt="${p.image_alt}" 
+                         class="product-img" 
+                         onerror="this.src='https://images.unsplash.com/photo-1560343090-f0409e92791a?q=80&w=600&auto=format&fit=crop'">
+                </div>
+                <h4>${p.name}</h4>
+                <p class="price">R$ ${p.price.toFixed(2)}</p>
+                <p class="stock">Estoque: ${p.stock}</p>
             </div>
         `).join('');
     } catch (error) {
@@ -80,6 +84,19 @@ async function loadProducts() {
     }
 }
 
-// Executa a função automaticamente assim que a página abrir
 document.addEventListener('DOMContentLoaded', loadProducts);
-document.addEventListener('DOMContentLoaded', loadProducts);
+
+function toggleHighContrast() {
+    document.body.classList.toggle('high-contrast');
+    
+    // Guarda o estado atual no armazenamento do navegador
+    const isActive = document.body.classList.contains('high-contrast');
+    localStorage.setItem('highContrast', isActive);
+}
+
+// Ativa automaticamente ao carregar a página se o utilizador já o tiver selecionado antes
+document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('highContrast') === 'true') {
+        document.body.classList.add('high-contrast');
+    }
+});

@@ -51,22 +51,62 @@ input, textarea { width: 100%; font-family: inherit; }
 .alert-icon { font-size: 2rem; margin-bottom: 0.5rem; }
 .mt-1 { margin-top: 1rem; }
 
+/* Card do produto */
 .product-card {
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.product-card img {
-  width: 100%;
-  height: 180px;      /* Define uma altura fixa e uniforme para todas as fotos */
-  object-fit: cover;  /* Faz a imagem preencher o espaço sem distorcer as proporções */
-  border-radius: 4px;
+/* Container fixo para a imagem (evita quebras e distorções) */
+.product-img-container {
+    width: 480px;
+    height: 480px; /* Altura padrão uniforme para todos os cards */
+    overflow: hidden;
+    border-radius: 6px;
+    background-color: #f7f7f7; /* Fundo leve enquanto a imagem carrega */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* Imagem responsiva e ajustada ao container */
 .product-img {
-  width: 100%;
-  height: 180px;      /* Altura fixa e uniforme para todos os cards */
-  object-fit: cover;  /* Recorta a imagem inteligentemente sem distorcer as proporções */
-  border-radius: 4px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Preenche o espaço sem deformar proporções */
+    display: block;
+}
+
+/* --- Modo de Alto Contraste (Acessibilidade) --- */
+body.high-contrast {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+}
+
+body.high-contrast header, 
+body.high-contrast .product-card, 
+body.high-contrast form {
+    background-color: #121212 !important;
+    border: 2px solid #FFFF00 !important;
+    color: #FFFFFF !important;
+}
+
+body.high-contrast input, 
+body.high-contrast textarea {
+    background-color: #000000 !important;
+    color: #FFFF00 !important;
+    border: 2px solid #FFFF00 !important;
+}
+
+body.high-contrast button {
+    background-color: #FFFF00 !important;
+    color: #000000 !important;
+    font-weight: bold;
+    border: 2px solid #FFFF00 !important;
 }
