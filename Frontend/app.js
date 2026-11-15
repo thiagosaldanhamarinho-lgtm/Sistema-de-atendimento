@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:8000"; // Substituir após o deploy no Railway
+const API_URL = "https://sistema-de-atendimento-production-9abb23d5.up.railway.app"; // Substituir após o deploy no Railway
 
 // Navegação entre as telas do SPA
 function navTo(screenId) {
